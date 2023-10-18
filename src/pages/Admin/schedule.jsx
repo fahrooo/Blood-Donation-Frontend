@@ -5,7 +5,7 @@ import DashboardLayout from "../../components/Layout/DashboardLayout";
 import TableLayout from "../../components/Layout/TableLayout";
 
 const SchedulePage = () => {
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState("all");
 
   const coloumns = [
     {

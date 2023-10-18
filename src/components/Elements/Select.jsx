@@ -15,10 +15,10 @@ export default function Select(props) {
           className={`inline-flex ${className} justify-between gap-x-1.5 rounded-md bg-white px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50`}
         >
           <h6>
-            {selected == 0 && placeholder}
-            {selected != 0 &&
+            {selected == "all" && placeholder}
+            {selected != "all" &&
               data.find((item) => item.id == selected).name.substring(0, 27)}
-            {selected != 0 &&
+            {selected != "all" &&
               data.find((item) => item.id == selected).name.length > 27 &&
               "..."}
           </h6>
@@ -45,10 +45,12 @@ export default function Select(props) {
             <Menu.Item>
               <h6
                 className={classNames(
-                  selected == 0 ? "bg-gray-100 text-gray-900" : "text-gray-700",
+                  selected == "all"
+                    ? "bg-gray-100 text-gray-900"
+                    : "text-gray-700",
                   "block px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 md:text-gray-900"
                 )}
-                onClick={() => setSelected(0)}
+                onClick={() => setSelected("all")}
               >
                 {placeholder}
               </h6>

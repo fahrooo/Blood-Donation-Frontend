@@ -6,11 +6,12 @@ import DashboardPage from "./pages/Admin/dashboard";
 import FacultyPage from "./pages/Admin/faculty";
 import UsersPage from "./pages/Admin/users";
 import SchedulePage from "./pages/Admin/schedule";
-import DonorsPage from "./pages/Admin/donors";
 import LoginPage from "./pages/Auth/Login";
 import RegisterPage from "./pages/Auth/register";
 import EmailPage from "./pages/Admin/email";
 import KuesionerPage from "./pages/User/kuesioner";
+import DonorPage from "./pages/Admin/donors";
+import TestPage from "./pages/test";
 
 const router = createBrowserRouter([
   {
@@ -42,8 +43,8 @@ const router = createBrowserRouter([
     element: <SchedulePage />,
   },
   {
-    path: "/donors",
-    element: <DonorsPage />,
+    path: "/donor",
+    element: <DonorPage />,
   },
   {
     path: "/email",
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: "/kuesioner",
     element: <KuesionerPage />,
+  },
+  {
+    path: "/test",
+    element: <TestPage />,
   },
 ]);
 

@@ -17,22 +17,27 @@ const FacultyPage = () => {
     {
       id: 1,
       name: "Fakultas Ilmu Kesehatan",
+      code: "FIK",
     },
     {
       id: 2,
       name: "Fakultas Matematika dan Ilmu Pengetahuan Alam",
+      code: "FMIPA",
     },
     {
       id: 3,
-      name: "Fakultas Ilmu Politik",
+      name: "Fakultas Ilmu Soisal dan Ilmu Politik",
+      code: "FISIP",
     },
     {
       id: 4,
       name: "Fakultas Kedokteran",
+      code: "FK",
     },
     {
       id: 5,
       name: "Fakultas Pertanian",
+      code: "FP",
     },
   ];
   return (

@@ -6,7 +6,8 @@ import DashboardLayout from "../../components/Layout/DashboardLayout";
 import TableLayout from "../../components/Layout/TableLayout";
 
 const UsersPage = () => {
-  const [selected, setSelected] = useState(0);
+  const [selectedFaculty, setSelectedFaculty] = useState("all");
+  const [selectedRole, setSelectedRole] = useState("all");
 
   const coloumns = [
     {
@@ -40,16 +41,25 @@ const UsersPage = () => {
       faculty: "Fakultas Ilmu Kesehatan",
       email: "cindimputrii@gmail.com",
       phone: 85703328754,
-      role: "Mahasiswa",
+      role: "Admin",
     },
     {
       id: 2,
-      name: "Fahro Nur FAuzi",
+      name: "Jhon Doe",
+      gender: "Male",
+      faculty: "Fakultas Pertanian",
+      email: "jhondoe@gmail.com",
+      phone: 85124835096,
+      role: "Mahasiswa",
+    },
+    {
+      id: 3,
+      name: "Bambang Pamungkas",
       gender: "Male",
       faculty: "-",
-      email: "fahronurf@gmail.com",
-      phone: 85322448008,
-      role: "Masyarakat"
+      email: "bambangpamungkas@gmail.com",
+      phone: 85122235556,
+      role: "Masyarakat",
     },
   ];
 
@@ -76,18 +86,48 @@ const UsersPage = () => {
     },
   ];
 
+  const dataRole = [
+    {
+      id: 1,
+      name: "Admin",
+    },
+    {
+      id: 2,
+      name: "Dosen",
+    },
+    {
+      id: 3,
+      name: "Staff",
+    },
+    {
+      id: 4,
+      name: "Mahasiswa",
+    },
+    {
+      id: 5,
+      name: "Masyarakat",
+    },
+  ];
+
   const filterSeacrh = () => {
     return (
       <>
-        <Input placeholder="Search NIM" />
         <Input placeholder="Search Name" />
         <Select
           placeholder="All Faculties"
           data={dataFaculty}
-          selected={selected}
-          setSelected={setSelected}
+          selected={selectedFaculty}
+          setSelected={setSelectedFaculty}
           className="w-full py-1.5"
-          width="w-60"
+          width="w-full md:w-60"
+        />
+        <Select
+          placeholder="Select Role"
+          data={dataRole}
+          selected={selectedRole}
+          setSelected={setSelectedRole}
+          className="w-full py-1.5"
+          width="w-full md:w-60"
         />
       </>
     );

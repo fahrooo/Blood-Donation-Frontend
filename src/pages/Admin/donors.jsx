@@ -5,8 +5,8 @@ import TableBodyDonors from "../../components/Fragments/Admin/Dashboard/TableBod
 import DashboardLayout from "../../components/Layout/DashboardLayout";
 import TableLayout from "../../components/Layout/TableLayout";
 
-const DonorsPage = () => {
-  const [selected, setSelected] = useState(0);
+const DonorPage = () => {
+  const [selected, setSelected] = useState("all");
 
   const coloumns = [
     {
@@ -33,6 +33,13 @@ const DonorsPage = () => {
       faculty: "Fakultas Ilmu Kesehatan",
       donorDate: "23-10-2023",
       isDonor: true,
+    },
+    {
+      id: 2,
+      name: "Bambang Pamungkas",
+      faculty: "Fakultas Ilmu Kesehatan",
+      donorDate: "23-10-2023",
+      isDonor: false,
     },
   ];
 
@@ -62,7 +69,6 @@ const DonorsPage = () => {
   const filterSeacrh = () => {
     return (
       <>
-        <Input placeholder="Search NIM" />
         <Input placeholder="Search Name" />
         <Select
           placeholder="All Faculties"
@@ -77,7 +83,7 @@ const DonorsPage = () => {
   };
 
   return (
-    <DashboardLayout title="Data Donors">
+    <DashboardLayout title="Data Donor">
       <TableLayout coloumns={coloumns} filter={filterSeacrh()}>
         <TableBodyDonors data={data} />
       </TableLayout>
@@ -85,4 +91,4 @@ const DonorsPage = () => {
   );
 };
 
-export default DonorsPage;
+export default DonorPage;

@@ -6,7 +6,7 @@ import Input from "../../components/Elements/Input";
 import TableBodyEmail from "../../components/Fragments/Admin/Dashboard/TableBodyEmail";
 
 const EmailPage = () => {
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState("all");
 
   const coloumns = [
     {
@@ -28,19 +28,19 @@ const EmailPage = () => {
       id: 1,
       faculty: "Fakultas Ilmu Kesehatan",
       subject: "Pemberitahuan Donor Darah",
-      message: `Dear Mahasiswa, I would like to take a moment to introduce myself and my company. My name is Paris and I am a Drafter at PT. Gas Indo. Our company provides customers with cutting-edge technology for all their email signature needs.`,
+      message: `Dengan hormat, Dalam rangka memeriahkan peringatan Hari Kesehatan Nasional ke-59 tahun 2023.`,
     },
     {
-      id: 1,
-      faculty: "Fakultas Ilmu Kesehatan",
+      id: 2,
+      faculty: "Fakultas Ilmu Sosial dan Ilmu Politik",
       subject: "Pemberitahuan Donor Darah",
-      message: `Dear Mahasiswa, I would like to take a moment to introduce myself and my company. My name is Paris and I am a Drafter at PT. Gas Indo. Our company provides customers with cutting-edge technology for all their email signature needs.`,
+      message: `Dengan hormat, Dalam rangka memeriahkan peringatan Hari Kesehatan Nasional ke-59 tahun 2023.`,
     },
     {
-      id: 1,
-      faculty: "Fakultas Ilmu Kesehatan",
+      id: 3,
+      faculty: "Fakultas Pertanian",
       subject: "Pemberitahuan Donor Darah",
-      message: `Dear Mahasiswa, I would like to take a moment to introduce myself and my company. My name is Paris and I am a Drafter at PT. Gas Indo. Our company provides customers with cutting-edge technology for all their email signature needs.`,
+      message: `Dengan hormat, Dalam rangka memeriahkan peringatan Hari Kesehatan Nasional ke-59 tahun 2023.`,
     },
   ];
 

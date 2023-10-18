@@ -1,5 +1,6 @@
 import Button from "../../../Elements/Button";
 import { MdDelete, MdEdit } from "react-icons/md";
+import Checkbox from "../../../Elements/Checkbox";
 
 const TableBodyDonors = ({ data }) => {
   return (
@@ -32,7 +33,7 @@ const TableBodyDonors = ({ data }) => {
               scope="row"
               className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
             >
-              {item.isDonor ? "Yes" : "No"}
+              <Checkbox checked={item.isDonor} />
             </th>
             <th
               scope="row"

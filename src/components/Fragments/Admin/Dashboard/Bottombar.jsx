@@ -31,9 +31,9 @@ const Bottombar = () => {
       route: "/schedule",
     },
     {
-      title: "Donors",
+      title: "Donor",
       icon: <MdOutlineHealing size={20} />,
-      route: "/donors",
+      route: "/donor",
     },
     {
       title: "Email",

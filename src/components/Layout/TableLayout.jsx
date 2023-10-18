@@ -18,7 +18,7 @@ const TableLayout = (props) => {
       </div>
       <div className={`w-full md:h-fit mt-3 overflow-y-auto`}>
         <div className="relative overflow-x-auto rounded-t-xl h-full">
-          <table className="w-full text-sm text-gray-500 text-center">
+          <table className="w-full text-sm text-gray-500 text-center border border-gray-200">
             <TableHeader coloumns={coloumns} />
             {children}
           </table>
