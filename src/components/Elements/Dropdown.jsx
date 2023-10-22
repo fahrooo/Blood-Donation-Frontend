@@ -6,14 +6,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Dropdown() {
+export default function Dropdown({ className }) {
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <Menu.Button className="inline-flex w-full justify-center items-center gap-x-1 text-sm md:text-base font-semibold text-gray-900 shadow-sm md:cursor-default">
+        <Menu.Button className="inline-flex w-full justify-center items-center gap-x-1 text-sm md:text-base font-semibold shadow-sm cursor-pointer">
           Cindi Maelani Putri
           <ChevronDownIcon
-            className="-mr-1 h-5 w-5 text-gray-400 md:hidden"
+            className={`-mr-1 h-5 w-5 ${className}`}
             aria-hidden="true"
           />
         </Menu.Button>
@@ -28,14 +28,16 @@ export default function Dropdown() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none md:hidden">
+        <Menu.Items
+          className={`absolute right-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none ${className}`}
+        >
           <div className="py-1">
             <Menu.Item>
               {({ active }) => (
                 <div
                   className={classNames(
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                    "block px-4 py-2 text-sm"
+                    "block px-4 py-2 text-sm cursor-pointer"
                   )}
                 >
                   Logout

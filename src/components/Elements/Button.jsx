@@ -1,5 +1,6 @@
 const Button = (props) => {
   const {
+    type = "button",
     color,
     children,
     className,
@@ -8,7 +9,7 @@ const Button = (props) => {
   } = props;
   return (
     <button
-      type="button"
+      type={type}
       className={`text-${textColor} bg-${color}-600 hover:bg-${color}-800 focus:ring-4 focus:ring-${color}-300 font-medium rounded-lg text-sm mr-2 mb-2 ${className}`}
       onClick={handleOnClick}
     >

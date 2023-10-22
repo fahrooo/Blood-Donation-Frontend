@@ -1,5 +1,16 @@
 const InputGroup = (props) => {
-  const { label, type, placeholder, name, number = false, icon } = props;
+  const {
+    label,
+    type,
+    placeholder,
+    name,
+    number = false,
+    icon,
+    onChange,
+    value,
+    error = false,
+    message,
+  } = props;
   return (
     <div className="mb-4">
       <label
@@ -8,22 +19,32 @@ const InputGroup = (props) => {
       >
         {label}
       </label>
-      <div className="flex">
-        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600 font-semibold">
+      <div className="flex mb-1">
+        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md font-medium">
           {icon}
         </span>
         <input
           type={type}
           id={name}
-          className="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className={`rounded-none rounded-r-lg border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm ${
+            error ? "border-red-600" : "border-gray-300"
+          } p-2.5`}
           placeholder={placeholder}
           onKeyPress={(event) => {
             if (number && !/[0-9]/.test(event.key)) {
               event.preventDefault();
             }
           }}
+          value={value}
+          onChange={onChange}
         ></input>
       </div>
+      {error && (
+        <div className="text-sm text-red-600">
+          <span className="font-medium">Oops! </span>
+          {message}
+        </div>
+      )}
     </div>
   );
 };

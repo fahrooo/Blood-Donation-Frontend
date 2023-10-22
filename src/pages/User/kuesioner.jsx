@@ -1,4 +1,5 @@
 import { MdOutlineHealing } from "react-icons/md";
+import Dropdown from "../../components/Elements/Dropdown";
 
 const KuesionerPage = () => {
   return (
@@ -8,9 +9,10 @@ const KuesionerPage = () => {
           <MdOutlineHealing size={40} />
           <h4 className="text-xl font-bold hidden md:block">Blood Donation</h4>
         </div>
-        <h6 className="font-semibold text-base text-white">
-          CIndi Maelani Putri
-        </h6>
+        <div className="flex justify-center items-center gap-2 text-white">
+          <h1 className="text-sm md:text-base font-semibold">Halo,</h1>
+          <Dropdown />
+        </div>
       </div>
       <div className="h-[90%] flex justify-center items-center px-5">
         <div className="w-[400px] md:w-[800px] h-96 rounded-xl shadow-2xl bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 flex justify-center items-center flex-col">
