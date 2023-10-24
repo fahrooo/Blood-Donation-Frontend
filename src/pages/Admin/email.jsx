@@ -4,9 +4,26 @@ import TableLayout from "../../components/Layout/TableLayout";
 import { useState } from "react";
 import Input from "../../components/Elements/Input";
 import TableBodyEmail from "../../components/Fragments/Admin/Dashboard/TableBodyEmail";
+import { GetFaculty } from "../../services/Faculty.service";
+import { GetEmail } from "../../services/Email.service";
 
 const EmailPage = () => {
-  const [selected, setSelected] = useState("all");
+  const [subject, setSubject] = useState("");
+  const [page, setPage] = useState(1);
+  const [selectedFaculty, setSelectedFaculty] = useState("all");
+
+  const { data: resEmail, isPending: isPendingEmail } = GetEmail({
+    subject: subject.toUpperCase() || "all",
+    faculty: selectedFaculty,
+    page: page,
+    limit: 5,
+  });
+
+  const { data: resFaculty } = GetFaculty({
+    name: "all",
+    page: 1,
+    limit: 9999,
+  });
 
   const coloumns = [
     {
@@ -23,61 +40,22 @@ const EmailPage = () => {
     },
   ];
 
-  const data = [
-    {
-      id: 1,
-      faculty: "Fakultas Ilmu Kesehatan",
-      subject: "Pemberitahuan Donor Darah",
-      message: `Dengan hormat, Dalam rangka memeriahkan peringatan Hari Kesehatan Nasional ke-59 tahun 2023.`,
-    },
-    {
-      id: 2,
-      faculty: "Fakultas Ilmu Sosial dan Ilmu Politik",
-      subject: "Pemberitahuan Donor Darah",
-      message: `Dengan hormat, Dalam rangka memeriahkan peringatan Hari Kesehatan Nasional ke-59 tahun 2023.`,
-    },
-    {
-      id: 3,
-      faculty: "Fakultas Pertanian",
-      subject: "Pemberitahuan Donor Darah",
-      message: `Dengan hormat, Dalam rangka memeriahkan peringatan Hari Kesehatan Nasional ke-59 tahun 2023.`,
-    },
-  ];
-
-  const dataFaculty = [
-    {
-      id: 1,
-      name: "Fakultas Ilmu Kesehatan",
-    },
-    {
-      id: 2,
-      name: "Fakultas Matematika dan Ilmu Pengetahuan Alam",
-    },
-    {
-      id: 3,
-      name: "Fakultas Ilmu Politik",
-    },
-    {
-      id: 4,
-      name: "Fakultas Kedokteran",
-    },
-    {
-      id: 5,
-      name: "Fakultas Pertanian",
-    },
-  ];
-
   const filterSeacrh = () => {
     return (
       <>
-        <Input placeholder="Search Subject" />
+        <Input
+          placeholder="Seacrh Subject"
+          className="w-full md:w-56 md:py-2.5 md:px-3"
+          type="text"
+          onChange={(e) => setSubject(e.target.value)}
+        />
         <Select
           placeholder="All Faculties"
-          data={dataFaculty}
-          selected={selected}
-          setSelected={setSelected}
-          className="w-full py-1.5"
-          width="w-60"
+          data={resFaculty?.data}
+          selected={selectedFaculty}
+          setSelected={setSelectedFaculty}
+          className="w-full py-1.5 md:py-2.5"
+          width="w-full md:w-60"
         />
       </>
     );
@@ -85,8 +63,14 @@ const EmailPage = () => {
 
   return (
     <DashboardLayout title="Data Email">
-      <TableLayout coloumns={coloumns} filter={filterSeacrh()}>
-        <TableBodyEmail data={data} />
+      <TableLayout
+        coloumns={coloumns}
+        filter={filterSeacrh()}
+        page={page}
+        setPage={setPage}
+        pageCount={resEmail?.totalPage}
+      >
+        <TableBodyEmail res={resEmail} isPending={isPendingEmail} />
       </TableLayout>
     </DashboardLayout>
   );

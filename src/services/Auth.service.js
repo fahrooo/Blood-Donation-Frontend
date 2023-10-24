@@ -17,3 +17,16 @@ export const register = async (payload) => {
 
   return response;
 };
+
+export const login = async (payload) => {
+  const url = "login";
+
+  const data = {
+    email: payload.email,
+    password: payload.password,
+  };
+
+  const response = await postFetcher(url, data);
+
+  return response;
+};

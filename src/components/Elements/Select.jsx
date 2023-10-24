@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import * as changeCase from "change-case";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -17,9 +18,11 @@ export default function Select(props) {
           <h6>
             {selected == "all" && placeholder}
             {selected != "all" &&
-              data.find((item) => item.id == selected).name.substring(0, 27)}
+              changeCase.capitalCase(
+                data.find((item) => item.id == selected).name.substring(0, 26)
+              )}
             {selected != "all" &&
-              data.find((item) => item.id == selected).name.length > 27 &&
+              data.find((item) => item.id == selected).name.length > 26 &&
               "..."}
           </h6>
           <ChevronDownIcon
@@ -68,7 +71,7 @@ export default function Select(props) {
                       )}
                       onClick={() => setSelected(item.id)}
                     >
-                      {item.name}
+                      {changeCase.capitalCase(item.name)}
                     </h6>
                   </Menu.Item>
                 );

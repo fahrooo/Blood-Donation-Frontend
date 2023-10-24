@@ -7,7 +7,10 @@ const axiosInstance = axios.create({
 });
 
 export const getFetchcer = (resource, init) =>
-  axiosInstance.get(resource, init).then((res) => res.data);
+  axiosInstance
+    .get(resource, init)
+    .then((res) => res.data)
+    .catch((err) => err.response);
 
 export const postFetcher = (resource, init) =>
   axiosInstance.post(resource, init).then((res) => res.data);

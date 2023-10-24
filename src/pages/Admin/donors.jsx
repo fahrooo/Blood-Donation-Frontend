@@ -4,9 +4,26 @@ import Select from "../../components/Elements/Select";
 import TableBodyDonors from "../../components/Fragments/Admin/Dashboard/TableBodyDonors";
 import DashboardLayout from "../../components/Layout/DashboardLayout";
 import TableLayout from "../../components/Layout/TableLayout";
+import { GetFaculty } from "../../services/Faculty.service";
+import { GetDonor } from "../../services/Donor.service";
 
 const DonorPage = () => {
-  const [selected, setSelected] = useState("all");
+  const [name, setName] = useState("");
+  const [page, setPage] = useState(1);
+  const [selectedFaculty, setSelectedFaculty] = useState("all");
+
+  const { data: resDonor, isPending: isPendingDonor } = GetDonor({
+    name: name.toUpperCase() || "all",
+    faculty: selectedFaculty,
+    page: page,
+    limit: 5,
+  });
+
+  const { data: resFaculty } = GetFaculty({
+    name: "all",
+    page: 1,
+    limit: 9999,
+  });
 
   const coloumns = [
     {
@@ -26,57 +43,22 @@ const DonorPage = () => {
     },
   ];
 
-  const data = [
-    {
-      id: 1,
-      name: "Cindi Maelani Putri",
-      faculty: "Fakultas Ilmu Kesehatan",
-      donorDate: "23-10-2023",
-      isDonor: true,
-    },
-    {
-      id: 2,
-      name: "Bambang Pamungkas",
-      faculty: "Fakultas Ilmu Kesehatan",
-      donorDate: "23-10-2023",
-      isDonor: false,
-    },
-  ];
-
-  const dataFaculty = [
-    {
-      id: 1,
-      name: "Fakultas Ilmu Kesehatan",
-    },
-    {
-      id: 2,
-      name: "Fakultas Matematika dan Ilmu Pengetahuan Alam",
-    },
-    {
-      id: 3,
-      name: "Fakultas Ilmu Politik",
-    },
-    {
-      id: 4,
-      name: "Fakultas Kedokteran",
-    },
-    {
-      id: 5,
-      name: "Fakultas Pertanian",
-    },
-  ];
-
   const filterSeacrh = () => {
     return (
       <>
-        <Input placeholder="Search Name" />
+        <Input
+          placeholder="Seacrh Name"
+          className="w-full md:w-56 md:py-2.5 md:px-3"
+          type="text"
+          onChange={(e) => setName(e.target.value)}
+        />
         <Select
           placeholder="All Faculties"
-          data={dataFaculty}
-          selected={selected}
-          setSelected={setSelected}
-          className="w-full py-1.5"
-          width="w-60"
+          data={resFaculty?.data}
+          selected={selectedFaculty}
+          setSelected={setSelectedFaculty}
+          className="w-full py-1.5 md:py-2.5"
+          width="w-full md:w-60"
         />
       </>
     );
@@ -84,8 +66,14 @@ const DonorPage = () => {
 
   return (
     <DashboardLayout title="Data Donor">
-      <TableLayout coloumns={coloumns} filter={filterSeacrh()}>
-        <TableBodyDonors data={data} />
+      <TableLayout
+        coloumns={coloumns}
+        filter={filterSeacrh()}
+        page={page}
+        setPage={setPage}
+        pageCount={resDonor?.totalPage}
+      >
+        <TableBodyDonors res={resDonor} isPending={isPendingDonor} />
       </TableLayout>
     </DashboardLayout>
   );

@@ -3,7 +3,7 @@ import { HiCheck, HiX } from "react-icons/hi";
 
 const ToastNotification = ({ message, status }) => {
   return (
-    <Toast className="absolute top-3 w-fit flex items-center justify-center shadow-xl border border-gray-200">
+    <Toast className="fixed z-50 mx-auto inset-x-0 top-3 w-64 flex items-center justify-center shadow-xl border border-gray-200">
       {status == "success" && (
         <>
           <div className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-green-100 text-green-500">

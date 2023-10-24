@@ -13,7 +13,6 @@ import { Navigate } from "react-router-dom";
 
 const RegisterPage = () => {
   const [form, setForm] = useState(1);
-  const [login, setLogin] = useState(false);
 
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
@@ -46,7 +45,7 @@ const RegisterPage = () => {
   const [statusToast, setStatusToast] = useState("");
   const [messageToast, setMessageToast] = useState("");
 
-  const { mutate: mutateRegister } = useMutation({
+  const { mutate: mutateRegister, isSuccess: isSuccessRegister } = useMutation({
     mutationFn: register,
   });
 
@@ -77,7 +76,7 @@ const RegisterPage = () => {
 
   const handleForm2 = () => {
     if (faculty == "" && role == 4) {
-      setFaculty(0);
+      setFaculty(null);
     }
     if (faculty == "" && role != 4) {
       setErrorFaculty(true);
@@ -129,7 +128,12 @@ const RegisterPage = () => {
       setErrorConfPassword(false);
     }
 
-    if (password != "" && confPassword != "" && password == confPassword) {
+    if (
+      password != "" &&
+      confPassword != "" &&
+      password == confPassword &&
+      password.length >= 8
+    ) {
       mutateRegister(
         {
           name: name.toUpperCase(),
@@ -147,8 +151,7 @@ const RegisterPage = () => {
             setMessageToast("Register success!");
             setTimeout(() => {
               setToast(false);
-              setLogin(true);
-            }, 5000);
+            }, 3000);
           },
           onError: (err) => {
             if (err.response.status === 404) {
@@ -216,7 +219,7 @@ const RegisterPage = () => {
 
   return (
     <AuthLayout title="Register">
-      {login && <Navigate to="/login" replace={true} />}
+      {isSuccessRegister && <Navigate to="/login" replace={true} />}
       {toast && (
         <ToastNotification status={statusToast} message={messageToast} />
       )}

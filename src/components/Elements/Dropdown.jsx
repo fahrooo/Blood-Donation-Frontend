@@ -1,17 +1,32 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useLogin } from "../hooks/useLogin";
+import { Navigate } from "react-router-dom";
+import * as changeCase from "change-case";
+import { useEffect } from "react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Dropdown({ className }) {
+  const [login, setLogin] = useState(false);
+  const [name, setName] = useState(false);
+
+  const infoPribadi = useLogin(setLogin);
+  useEffect(() => {
+    if (infoPribadi) {
+      setName(changeCase.capitalCase(infoPribadi?.data?.name));
+    }
+  }, [infoPribadi]);
+
   return (
     <Menu as="div" className="relative inline-block text-left">
+      {login && <Navigate to="/login" replace={true} />}
       <div>
         <Menu.Button className="inline-flex w-full justify-center items-center gap-x-1 text-sm md:text-base font-semibold shadow-sm cursor-pointer">
-          Cindi Maelani Putri
+          {name}
           <ChevronDownIcon
             className={`-mr-1 h-5 w-5 ${className}`}
             aria-hidden="true"
