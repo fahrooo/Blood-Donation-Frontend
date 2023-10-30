@@ -6,6 +6,7 @@ axios.defaults.withCredentials = true;
 //   baseURL: "http://127.0.0.1:5174/",
 // });
 const axiosInstance = axios.create({
+  withCredentials: true,
   baseURL: "http://103.155.246.50:5174/",
 });
 
