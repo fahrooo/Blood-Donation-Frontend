@@ -11,6 +11,7 @@ import SideItem from "../../../Elements/SideItem";
 import { Navigate, useLocation } from "react-router-dom";
 import { Logout } from "../../../hooks/useLogout";
 import { useState } from "react";
+import logo from "/images/logo.png";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -53,8 +54,8 @@ const Sidebar = () => {
     <aside className="hidden md:block w-96 bg-white min-h-screen z-50">
       {login && <Navigate to="/login" replace={true} />}
       <div className="h-[10%] shadow-lg text-center flex justify-center items-center gap-2 border-r">
-        <MdOutlineHealing size={40} />
-        <h1 className="font-bold text-xl">Blood Donation</h1>
+      <img src={logo} className="w-6" />
+        <h1 className="font-bold text-xl">Bloodis</h1>
       </div>
       <div className="h-[90%] p-8 flex flex-col justify-between bg-slate-100">
         <div className="flex flex-col gap-2">

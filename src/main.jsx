@@ -11,14 +11,14 @@ import RegisterPage from "./pages/Auth/register";
 import EmailPage from "./pages/Admin/email";
 import KuesionerPage from "./pages/User/kuesioner";
 import DonorPage from "./pages/Admin/donors";
-import TestPage from "./pages/test";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import LandingPage from "./pages/landing";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <h1>Hello World!</h1>,
+    element: <LandingPage />,
   },
   {
     path: "/login",
@@ -55,10 +55,6 @@ const router = createBrowserRouter([
   {
     path: "/kuesioner",
     element: <KuesionerPage />,
-  },
-  {
-    path: "/test",
-    element: <TestPage />,
   },
 ]);
 

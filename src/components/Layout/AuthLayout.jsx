@@ -1,15 +1,14 @@
-import { MdOutlineHealing } from "react-icons/md";
 import { Link } from "react-router-dom";
+import logo from "/images/logo.png";
 
 const AuthLayout = ({ children, title }) => {
   return (
     <div className="h-screen w-full flex">
-      <div className="w-full md:w-1/2 bg-blue-800 text-white h-full hidden md:flex flex-col justify-center items-center font-bold gap-4">
-        <MdOutlineHealing size={200} />
-        <h1 className="text-6xl">Blood Donation</h1>
-        <h1 className="text-6xl">System</h1>
+      <div className="w-full md:w-1/2 bg-white text-black h-full hidden md:flex flex-col justify-center items-center font-bold gap-4">
+        <img src={logo} className="w-52" />
+        <h1 className="text-6xl">Bloodis</h1>
       </div>
-      <div className="w-full md:w-1/2 bg-gray-100 h-full flex justify-center items-center px-5">
+      <div className="w-full md:w-1/2 bg-blue-600 h-full flex justify-center items-center px-5">
         <div className="w-full md:w-1/2 bg-white flex flex-col justify-center items-center p-10 rounded-xl shadow-xl">
           <h1 className="text-3xl font-bold mb-8">{title}</h1>
           {children}
