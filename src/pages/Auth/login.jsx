@@ -53,7 +53,6 @@ const LoginPage = () => {
           onSuccess: (res) => {
             Cookies.set("token", res.token, { secure: true, expires: 0.5 });
             const data = jwtDecode(res.token);
-            console.log(data);
             setToast(true);
             setStatusToast("success");
             setMessageToast("Login success!");
