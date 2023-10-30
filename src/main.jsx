@@ -13,7 +13,7 @@ import DonorPage from "./pages/Admin/donors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import LandingPage from "./pages/landing";
-import LoginPage from "./pages/Auth/Login";
+import LoginPage from "./pages/Auth/login";
 
 const router = createBrowserRouter([
   {
