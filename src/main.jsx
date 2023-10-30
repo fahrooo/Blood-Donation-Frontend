@@ -6,7 +6,6 @@ import DashboardPage from "./pages/Admin/dashboard";
 import FacultyPage from "./pages/Admin/faculty";
 import UsersPage from "./pages/Admin/users";
 import SchedulePage from "./pages/Admin/schedule";
-import LoginPage from "./pages/Auth/Login";
 import RegisterPage from "./pages/Auth/register";
 import EmailPage from "./pages/Admin/email";
 import KuesionerPage from "./pages/User/kuesioner";
@@ -14,6 +13,7 @@ import DonorPage from "./pages/Admin/donors";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import LandingPage from "./pages/landing";
+import LoginPage from "./pages/Auth/Login";
 
 const router = createBrowserRouter([
   {
