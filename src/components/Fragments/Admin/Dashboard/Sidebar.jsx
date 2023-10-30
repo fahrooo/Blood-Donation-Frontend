@@ -8,10 +8,13 @@ import {
   MdSchedule,
 } from "react-icons/md";
 import SideItem from "../../../Elements/SideItem";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+import { Logout } from "../../../hooks/useLogout";
+import { useState } from "react";
 
 const Sidebar = () => {
   const location = useLocation();
+  const [login, setLogin] = useState(false);
 
   const menus = [
     {
@@ -48,6 +51,7 @@ const Sidebar = () => {
 
   return (
     <aside className="hidden md:block w-96 bg-white min-h-screen z-50">
+      {login && <Navigate to="/login" replace={true} />}
       <div className="h-[10%] shadow-lg text-center flex justify-center items-center gap-2 border-r">
         <MdOutlineHealing size={40} />
         <h1 className="font-bold text-xl">Blood Donation</h1>
@@ -66,7 +70,10 @@ const Sidebar = () => {
             );
           })}
         </div>
-        <div className="bg-red-600 hover:bg-red-800 text-white p-3 rounded-md flex items-center gap-2 cursor-pointer">
+        <div
+          className="bg-red-600 hover:bg-red-800 text-white p-3 rounded-md flex items-center gap-2 cursor-pointer"
+          onClick={() => Logout(setLogin)}
+        >
           <div>
             <MdLogout size={20} />
           </div>

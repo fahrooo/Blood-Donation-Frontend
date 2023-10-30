@@ -4,7 +4,12 @@ import Button from "../../../Elements/Button";
 import { MdDelete, MdReplay } from "react-icons/md";
 import * as changeCase from "change-case";
 
-const TableBodyEmail = ({ res, isPending }) => {
+const TableBodyEmail = ({
+  res,
+  isPending,
+  handleResending,
+  handleShowDelete,
+}) => {
   return (
     <tbody>
       {isPending && (
@@ -38,14 +43,14 @@ const TableBodyEmail = ({ res, isPending }) => {
             >
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 dark:text-white"
               >
                 {item?.faculty?.name?.length > 0 &&
                   changeCase.capitalCase(item?.faculty?.name)}
               </th>
               <th
                 scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                className="px-6 py-4 font-medium text-gray-900 dark:text-white"
               >
                 {item?.subject?.length > 0 &&
                   changeCase.capitalCase(item?.subject)}
@@ -61,10 +66,18 @@ const TableBodyEmail = ({ res, isPending }) => {
                 scope="row"
                 className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
-                <Button className="px-2 py-2 mr-2" color="blue">
+                <Button
+                  className="px-2 py-2 mr-2"
+                  color="blue"
+                  handleOnClick={() => handleResending(item)}
+                >
                   <MdReplay />
                 </Button>
-                <Button className="px-2 py-2" color="red">
+                <Button
+                  className="px-2 py-2"
+                  color="red"
+                  handleOnClick={() => handleShowDelete(item.id)}
+                >
                   <MdDelete />
                 </Button>
               </th>

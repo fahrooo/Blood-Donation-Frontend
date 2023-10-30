@@ -5,6 +5,7 @@ import { useLogin } from "../hooks/useLogin";
 import { Navigate } from "react-router-dom";
 import * as changeCase from "change-case";
 import { useEffect } from "react";
+import { Logout } from "../hooks/useLogout";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -54,6 +55,7 @@ export default function Dropdown({ className }) {
                     active ? "bg-gray-100 text-gray-900" : "text-gray-700",
                     "block px-4 py-2 text-sm cursor-pointer"
                   )}
+                  onClick={() => Logout(setLogin)}
                 >
                   Logout
                 </div>

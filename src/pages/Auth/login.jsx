@@ -7,8 +7,11 @@ import ToastNotification from "../../components/Elements/ToastNotification";
 import { login } from "../../services/Auth.service";
 import { useMutation } from "@tanstack/react-query";
 import Cookies from "js-cookie";
+import jwtDecode from "jwt-decode";
 
 const LoginPage = () => {
+  const [toDashboard, setToDashboard] = useState(false);
+  const [toKuesioner, setToKuesioner] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,7 +25,7 @@ const LoginPage = () => {
   const [statusToast, setStatusToast] = useState("");
   const [messageToast, setMessageToast] = useState("");
 
-  const { mutate: mutateLogin, isSuccess: isSuccessLogin } = useMutation({
+  const { mutate: mutateLogin } = useMutation({
     mutationFn: login,
   });
 
@@ -49,11 +52,18 @@ const LoginPage = () => {
         {
           onSuccess: (res) => {
             Cookies.set("token", res.token, { secure: true, expires: 0.5 });
+            const data = jwtDecode(res.token);
+            console.log(data);
             setToast(true);
             setStatusToast("success");
             setMessageToast("Login success!");
             setTimeout(() => {
               setToast(false);
+              if (data.role == 5) {
+                setToDashboard(true);
+              } else {
+                setToKuesioner(true);
+              }
             }, 3000);
           },
           onError: (err) => {
@@ -86,7 +96,8 @@ const LoginPage = () => {
   };
   return (
     <AuthLayout title="Login">
-      {isSuccessLogin && <Navigate to="/dashboard" replace={true} />}
+      {toDashboard && <Navigate to="/dashboard" replace={true} />}
+      {toKuesioner && <Navigate to="/kuesioner" replace={true} />}
       {toast && (
         <ToastNotification status={statusToast} message={messageToast} />
       )}
@@ -116,7 +127,7 @@ const LoginPage = () => {
           className="w-full px-3 py-3"
           handleOnClick={handleLogin}
         >
-          Register
+          Login
         </Button>
       </div>
     </AuthLayout>

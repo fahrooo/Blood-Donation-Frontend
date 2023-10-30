@@ -4,7 +4,12 @@ import Button from "../../../Elements/Button";
 import { MdDelete, MdEdit } from "react-icons/md";
 import * as changeCase from "change-case";
 
-const TableBodyUsers = ({ res, isPending }) => {
+const TableBodyUsers = ({
+  res,
+  isPending,
+  handleShowEdit,
+  handleShowDelete,
+}) => {
   return (
     <tbody>
       {isPending && (
@@ -36,11 +41,8 @@ const TableBodyUsers = ({ res, isPending }) => {
               key={index}
               className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
             >
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-              >
-                {changeCase.capitalCase(item.name)}
+              <th scope="row" className="px-6 py-4 font-medium text-gray-900">
+                {item?.name.length > 0 && changeCase.capitalCase(item.name)}
               </th>
               <th
                 scope="row"
@@ -49,10 +51,7 @@ const TableBodyUsers = ({ res, isPending }) => {
                 {item.gender == 1 && "Male"}
                 {item.gender == 2 && "Female"}
               </th>
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
-              >
+              <th scope="row" className="px-6 py-4 font-medium text-gray-900">
                 {item?.faculty?.name.length > 0
                   ? changeCase.capitalCase(item?.faculty?.name)
                   : "-"}
@@ -74,20 +73,28 @@ const TableBodyUsers = ({ res, isPending }) => {
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
               >
-                {item.role == 0 && "Admin"}
                 {item.role == 1 && "Dosen"}
                 {item.role == 2 && "Staff"}
                 {item.role == 3 && "Mahasiswa"}
                 {item.role == 4 && "Masyarakat"}
+                {item.role == 5 && "Admin"}
               </th>
               <th
                 scope="row"
                 className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap"
               >
-                <Button className="px-2 py-2 mr-1" color="blue">
+                <Button
+                  className="px-2 py-2 mr-1"
+                  color="blue"
+                  handleOnClick={() => handleShowEdit(item.id)}
+                >
                   <MdEdit />
                 </Button>
-                <Button className="px-2 py-2" color="red">
+                <Button
+                  className="px-2 py-2"
+                  color="red"
+                  handleOnClick={() => handleShowDelete(item.id)}
+                >
                   <MdDelete />
                 </Button>
               </th>

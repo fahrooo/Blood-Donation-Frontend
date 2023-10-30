@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getFetchcer } from "../utils/axios";
+import { deleteFetcher, getFetchcer, postFetcher } from "../utils/axios";
 
 export const GetEmail = (props) => {
   const { subject, faculty, page, limit } = props;
@@ -11,4 +11,48 @@ export const GetEmail = (props) => {
   });
 
   return { data, ...others };
+};
+
+export const getEmailById = async (id) => {
+  const url = `email/${id}`;
+
+  const response = await getFetchcer(url);
+
+  return response;
+};
+
+export const PostEmail = async (payload) => {
+  const url = "email";
+
+  const data = {
+    idFaculty: payload.faculty,
+    subject: payload.subject,
+    message: payload.message,
+  };
+
+  const response = await postFetcher(url, data);
+
+  return response;
+};
+
+export const DeleteEmail = async (payload) => {
+  const url = `email/${payload.id}`;
+
+  const response = await deleteFetcher(url);
+
+  return response;
+};
+
+export const SendEmail = async (payload) => {
+  const url = "email/send";
+
+  const data = {
+    toEmail: payload.toEmail,
+    subject: payload.subject,
+    message: payload.message,
+  };
+
+  const response = await postFetcher(url, data);
+
+  return response;
 };

@@ -4,8 +4,19 @@ import Button from "../Elements/Button";
 import { AiOutlinePlus } from "react-icons/ai";
 
 const TableLayout = (props) => {
-  const { coloumns, children, filter, setPage, page, pageCount, handleShowAdd } =
-    props;
+  const {
+    coloumns,
+    children,
+    filter,
+    setPage,
+    page,
+    pageCount,
+    handleShowAdd,
+    rows,
+    rowsPage,
+    totalRows,
+    disabled,
+  } = props;
 
   return (
     <div className="bg-white w-full rounded-lg shadow-lg p-10 mb-16 md:mb-0">
@@ -16,6 +27,7 @@ const TableLayout = (props) => {
             color="blue"
             className="w-full md:w-fit py-1.5 px-2 md:py-2.5 md:px-3 flex justify-center items-center"
             handleOnClick={handleShowAdd}
+            disabled={disabled}
           >
             <AiOutlinePlus size={20} />
           </Button>
@@ -30,7 +42,14 @@ const TableLayout = (props) => {
         </div>
       </div>
       <div className="flex justify-center md:justify-end mt-6">
-        <TablePaginate page={page} setPage={setPage} pageCount={pageCount} />
+        <TablePaginate
+          page={page}
+          setPage={setPage}
+          pageCount={pageCount}
+          rows={rows}
+          rowsPage={rowsPage}
+          totalRows={totalRows}
+        />
       </div>
     </div>
   );

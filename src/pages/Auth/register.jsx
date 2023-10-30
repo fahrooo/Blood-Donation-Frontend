@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../components/Elements/Button";
 import FormInput from "../../components/Elements/FormInput";
 import Radio from "../../components/Elements/Radio";
@@ -10,9 +10,11 @@ import { useMutation } from "@tanstack/react-query";
 import { register } from "../../services/Auth.service";
 import ToastNotification from "../../components/Elements/ToastNotification";
 import { Navigate } from "react-router-dom";
+import { GetFaculty } from "../../services/Faculty.service";
 
 const RegisterPage = () => {
   const [form, setForm] = useState(1);
+  const [toLogin, setToLogin] = useState(false);
 
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
@@ -45,9 +47,15 @@ const RegisterPage = () => {
   const [statusToast, setStatusToast] = useState("");
   const [messageToast, setMessageToast] = useState("");
 
-  const { mutate: mutateRegister, isSuccess: isSuccessRegister } = useMutation({
+  const { mutate: mutateRegister } = useMutation({
     mutationFn: register,
   });
+
+  useEffect(() => {
+    if (faculty == "" && role == 4) {
+      setFaculty(null);
+    }
+  }, [faculty, role]);
 
   const handleForm1 = () => {
     if (name == "") {
@@ -75,9 +83,6 @@ const RegisterPage = () => {
   };
 
   const handleForm2 = () => {
-    if (faculty == "" && role == 4) {
-      setFaculty(null);
-    }
     if (faculty == "" && role != 4) {
       setErrorFaculty(true);
       setMessageFaculty("Faculty is required");
@@ -151,6 +156,7 @@ const RegisterPage = () => {
             setMessageToast("Register success!");
             setTimeout(() => {
               setToast(false);
+              setToLogin(true);
             }, 3000);
           },
           onError: (err) => {
@@ -194,32 +200,15 @@ const RegisterPage = () => {
     },
   ];
 
-  const dataFaculty = [
-    {
-      id: 1,
-      name: "Fakultas Ilmu Kesehatan",
-    },
-    {
-      id: 2,
-      name: "Fakultas Matematika dan Ilmu Pengetahuan Alam",
-    },
-    {
-      id: 3,
-      name: "Fakultas Ilmu Politik",
-    },
-    {
-      id: 4,
-      name: "Fakultas Kedokteran",
-    },
-    {
-      id: 5,
-      name: "Fakultas Pertanian",
-    },
-  ];
+  const { data: resFaculty } = GetFaculty({
+    name: "all",
+    page: 1,
+    limit: 9999,
+  });
 
   return (
     <AuthLayout title="Register">
-      {isSuccessRegister && <Navigate to="/login" replace={true} />}
+      {toLogin && <Navigate to="/login" replace={true} />}
       {toast && (
         <ToastNotification status={statusToast} message={messageToast} />
       )}
@@ -289,7 +278,7 @@ const RegisterPage = () => {
         <div className="w-full">
           <FormSelect
             label="Faculty"
-            data={dataFaculty}
+            data={resFaculty?.data}
             name="faculty"
             placeholder="Select Faculty"
             value={faculty}

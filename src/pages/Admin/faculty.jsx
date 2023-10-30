@@ -265,6 +265,9 @@ const FacultyPage = () => {
         page={page}
         setPage={setPage}
         pageCount={resFaculty?.totalPage}
+        rows={resFaculty?.rows}
+        rowsPage={resFaculty?.rowsPage}
+        totalRows={resFaculty?.totalRows}
         handleShowAdd={handleShowAdd}
       >
         <TableBodyFaculty

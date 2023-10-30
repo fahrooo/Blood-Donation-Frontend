@@ -1,3 +1,4 @@
+import * as changeCase from "change-case";
 const FormSelect = ({
   data,
   name,
@@ -28,13 +29,14 @@ const FormSelect = ({
         } rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:border-blue-500 focus:outline-none focus:shadow-outline mb-1 disabled:cursor-not-allowed`}
       >
         <option value="">{placeholder}</option>
-        {data.map((item, index) => {
-          return (
-            <option key={index} value={item.id}>
-              {item.name}
-            </option>
-          );
-        })}
+        {data.length > 0 &&
+          data.map((item, index) => {
+            return (
+              <option key={index} value={item.id}>
+                {changeCase.capitalCase(item.name)}
+              </option>
+            );
+          })}
       </select>
       {error && (
         <div className="text-sm text-red-600">
