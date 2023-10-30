@@ -52,7 +52,6 @@ const LoginPage = () => {
         {
           onSuccess: (res) => {
             Cookies.set("token", res.token, { expires: 0.5 });
-            localStorage.setItem("token", res.token);
             const data = jwtDecode(res.token);
             setToast(true);
             setStatusToast("success");
