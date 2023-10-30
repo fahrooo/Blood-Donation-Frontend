@@ -3,7 +3,7 @@ import axios from "axios";
 axios.defaults.withCredentials = true;
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5174/",
+  baseURL: "http://103.155.246.50:5174/",
 });
 
 export const getFetchcer = (resource, init) =>
