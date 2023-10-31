@@ -7,7 +7,7 @@ axios.defaults.withCredentials = true;
 // });
 const axiosInstance = axios.create({
   withCredentials: true,
-  baseURL: "http://103.155.246.50:5174/",
+  baseURL: "http://www.bloodis.site:5174/",
 });
 
 export const getFetchcer = (resource, init) =>

@@ -88,7 +88,9 @@ const DashboardPage = () => {
     limit: 999999,
   });
 
-  const { data: resSchedule } = GetSchedule({
+  const {
+    data: resSchedule,
+  } = GetSchedule({
     faculty: "all",
     page: 1,
     limit: 999999,
@@ -120,7 +122,7 @@ const DashboardPage = () => {
     ],
     datasets: [
       {
-        label: "Data Pendonor 2023",
+        label: `Data Pendonor ${new Date().getFullYear()}`,
         data: [
           jan?.data?.length,
           feb?.data?.length,
@@ -223,7 +225,9 @@ const DashboardPage = () => {
         </div>
         <div className="grid md:grid-cols-1 gap-4">
           <div className="bg-white h-fit md:h-[350px] w-72 md:w-full rounded-xl shadow-xl flex justify-center items-center p-4 md:p-10 flex-col">
-            <h2 className="font-semibold text-lg">Data Pendonor 2023</h2>
+            <h2 className="font-semibold text-lg">
+              Data Pendonor {new Date().getFullYear()}
+            </h2>
             <div className="w-full h-full flex justify-center">
               <Bar data={dataBar} options={configBar}></Bar>
             </div>
