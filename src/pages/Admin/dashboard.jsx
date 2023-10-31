@@ -88,6 +88,13 @@ const DashboardPage = () => {
     limit: 999999,
   });
 
+  const { data: resDonor } = GetDonor({
+    name: "all",
+    faculty: "all",
+    page: 1,
+    limit: 999999,
+  });
+
   const { data: resSchedule } = GetSchedule({
     faculty: "all",
     page: 1,
@@ -95,13 +102,6 @@ const DashboardPage = () => {
   });
 
   console.log(resSchedule);
-
-  const { data: resDonor } = GetDonor({
-    name: "all",
-    faculty: "all",
-    page: 1,
-    limit: 999999,
-  });
 
   ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
