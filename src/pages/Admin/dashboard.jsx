@@ -212,7 +212,7 @@ const DashboardPage = () => {
             <h2 className="text-lg font-semibold">Data Schedule</h2>
             <MdSchedule size={40} className="text-yellow-600" />
             <h2 className="text-2xl font-semibold">
-              {resSchedule?.data?.length} Schedule
+              1 Schedule
             </h2>
           </div>
           <div className="bg-white h-fit rounded-xl shadow-xl p-4 flex flex-col justify-center items-center gap-4">
