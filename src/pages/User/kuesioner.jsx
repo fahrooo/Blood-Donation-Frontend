@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Fragments/User/Navbar";
-import { AiOutlineCheckCircle } from "react-icons/ai";
+import { AiOutlineCheckCircle, AiOutlineInfoCircle, AiOutlineSmile } from "react-icons/ai";
 import { useMutation } from "@tanstack/react-query";
 import { PostDonor, getDonorByDate } from "../../services/Donor.service";
 import { useLogin } from "../../components/hooks/useLogin";
@@ -16,7 +16,7 @@ const KuesionerPage = () => {
     mutationFn: PostDonor,
   });
 
-  const { data: resLastSchedule } = GetSchedule({
+  const { data: resLastSchedule, refetch: refecthLastSchedule } = GetSchedule({
     faculty: "all",
     page: 1,
     limit: 1,
@@ -29,15 +29,22 @@ const KuesionerPage = () => {
         "YYYY-MM-DD"
       ),
     }).then((res) => {
-      if (res?.data.length > 0 && res.data[0]?.isRegister == true) {
-        setChoice("yes");
-      } else if (res?.data.length > 0 && res.data[0]?.isRegister == false) {
-        setChoice("no");
+      if (
+        Date.parse(new Date()) <
+        Date.parse(new Date(resLastSchedule?.data[0]?.closed))
+      ) {
+        if (res?.data.length > 0 && res.data[0]?.isRegister == true) {
+          setChoice("yes");
+        } else if (res?.data.length > 0 && res.data[0]?.isRegister == false) {
+          setChoice("no");
+        } else {
+          setChoice("question");
+        }
       } else {
-        setChoice("question");
+        setChoice("disabled");
       }
     });
-  }, [idUser, resLastSchedule?.data]);
+  }, [idUser, resLastSchedule?.data, refecthLastSchedule]);
 
   const handleYes = () => {
     mutatePostDonor(
@@ -94,9 +101,17 @@ const KuesionerPage = () => {
               )}
               {choice == "no" && (
                 <div className="w-full flex justify-center items-center">
-                  <AiOutlineCheckCircle
+                  <AiOutlineSmile
                     size={100}
-                    className="bg-green-600 rounded-full mb-5"
+                    className="bg-yellow-300 rounded-full mb-5"
+                  />
+                </div>
+              )}
+              {choice == "disabled" && (
+                <div className="w-full flex justify-center items-center">
+                  <AiOutlineInfoCircle
+                    size={100}
+                    className="bg-blue-400 rounded-full mb-5"
                   />
                 </div>
               )}
@@ -114,6 +129,8 @@ const KuesionerPage = () => {
                 `Terima kasih, reminder akan dikirim melalui email. Tetap jaga kesehatan Anda.`}
               {choice == "no" &&
                 `Terima kasih, Anda bisa berpartisipasi pada kegiatan donor selanjutnya.`}
+              {choice == "disabled" &&
+                `Mohon maaf, tidak ada schedule yang tersedia. Silahkan menunggu schedule berikutnya.`}
             </h2>
             {choice == "question" && (
               <div className="flex justify-between w-full gap-5 mt-16">
