@@ -34,7 +34,6 @@ const DashboardPage = () => {
   const [okt, setOkt] = useState({});
   const [nov, setNov] = useState({});
   const [des, setDes] = useState({});
-  const [resSchedule, setResSchedule] = useState({});
 
   useEffect(() => {
     getDonorByMonthYear({ month: "1", year: new Date().getFullYear() }).then(
@@ -96,13 +95,11 @@ const DashboardPage = () => {
     limit: 999999,
   });
 
-  useEffect(() => {
-    GetSchedule({ faculty: "all", page: 1, limit: 999999 }).then((res) =>
-      setResSchedule(res)
-    );
-  }, []);
-
-  console.log(resSchedule);
+  const { data: resSchedule } = GetSchedule({
+    faculty: "all",
+    page: 1,
+    limit: 999999,
+  });
 
   ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -212,7 +209,9 @@ const DashboardPage = () => {
           <div className="bg-white h-fit rounded-xl shadow-xl p-4 flex flex-col justify-center items-center gap-4">
             <h2 className="text-lg font-semibold">Data Schedule</h2>
             <MdSchedule size={40} className="text-yellow-600" />
-            <h2 className="text-2xl font-semibold">1 Schedule</h2>
+            <h2 className="text-2xl font-semibold">
+              {resSchedule?.data?.length} Schedule
+            </h2>
           </div>
           <div className="bg-white h-fit rounded-xl shadow-xl p-4 flex flex-col justify-center items-center gap-4">
             <h2 className="text-lg font-semibold">Data Pendonor</h2>
