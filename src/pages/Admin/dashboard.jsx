@@ -95,11 +95,17 @@ const DashboardPage = () => {
     limit: 999999,
   });
 
-  const { data: resSchedule } = GetSchedule({
+  const { data: resSchedule, refetch } = GetSchedule({
     faculty: "all",
     page: 1,
     limit: 999999,
   });
+
+  useEffect(() => {
+    setInterval(() => {
+      refetch();
+    }, 1000);
+  }, [refetch]);
 
   ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
@@ -184,9 +190,11 @@ const DashboardPage = () => {
     },
   };
 
-  const isDonorTrue = resDonor?.data?.filter(function (item) {
-    return item.isDonor == true;
-  });
+  const isDonorTrue =
+    resDonor?.data?.length > 0 &&
+    resDonor?.data?.filter(function (item) {
+      return item.isDonor == true;
+    });
 
   return (
     <DashboardLayout title="Dashboard">
