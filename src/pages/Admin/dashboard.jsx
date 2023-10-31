@@ -88,13 +88,13 @@ const DashboardPage = () => {
     limit: 999999,
   });
 
-  const {
-    data: resSchedule,
-  } = GetSchedule({
+  const { data: resSchedule } = GetSchedule({
     faculty: "all",
     page: 1,
     limit: 999999,
   });
+
+  console.log(resSchedule);
 
   const { data: resDonor } = GetDonor({
     name: "all",
